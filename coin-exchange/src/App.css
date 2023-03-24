@@ -1,10 +1,12 @@
 .App {
   text-align: center;
+  
 
 }
 
 .coin-table{
   margin: 50px auto 50px auto;
+  text-align: left;
 }
 
 .App-logo {

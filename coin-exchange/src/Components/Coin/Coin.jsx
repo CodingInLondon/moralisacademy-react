@@ -1,7 +1,14 @@
 
 import React, { Component } from 'react';
-import './Coin.css';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Tr = styled.tr`
+  border: 2px solid;
+  border-color: black;
+  width: 40%;
+  text-align: left;
+`;
 
 export default class Coin extends Component {
 
@@ -13,20 +20,6 @@ export default class Coin extends Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
-
-  // componentDidMount(){
-  //   const callback = ()=>{
-  //     const randomPercentage = 0.995 + Math.random() * 0.01;
-
-  //     this.setState( (oldState)=>{
-  //       return{
-  //         price: oldState.price* randomPercentage
-  //       };
-  //     });
-  //   }
-
-  //   setInterval(callback, 1000);
-  // }
 
   handleClick(event){
     event.preventDefault();
@@ -43,7 +36,7 @@ export default class Coin extends Component {
 
   render() {
     return (
-      <tr className="coin-row">
+      <Tr>
         <td>{this.props.name}</td>
         <td>{this.props.ticker}</td>
         <td>${this.state.price}</td>
@@ -51,7 +44,7 @@ export default class Coin extends Component {
           <form action="#" method="POST">
             <button onClick={this.handleClick}>Refresh</button>
           </form></td>
-      </tr>
+      </Tr>
     )
   }
 }
