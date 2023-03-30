@@ -14,8 +14,8 @@ function App() {
       <table className='coin-table'>
         <thead>
           <tr>
-            <th>Lame</th>
-            <th>Tickler</th>
+            <th>Name</th>
+            <th>Ticker</th>
             <th>Price</th>
           </tr>
         </thead>
