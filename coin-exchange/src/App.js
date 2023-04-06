@@ -1,7 +1,7 @@
 import './App.css';
 import AccountBalance from './Components/AccountBalance/AccountBalance';
-import logo from './logo.svg'; 
 import React from 'react';
+import AppHeader from './Components/AppHeader/AppHeader';
 import CoinList from './Components/CoinList/CoinList';
 
 
@@ -71,10 +71,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <img src={logo} alt="React logo" className='App-logo' />
           <h1 className='App-title'>Coin Exchange </h1>
-        </header>
+        </header> */}
+        <AppHeader />
         <AccountBalance amount={this.state.balance} />
         <CoinList coinData={this.state.coinData} />
 
