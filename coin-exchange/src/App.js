@@ -1,8 +1,8 @@
 import './App.css';
-import Coin from './Components/Coin/Coin.jsx';
-import AccountBalance from './Components/AccountBalance/AccountBalance.jsx';
+import AccountBalance from './Components/AccountBalance/AccountBalance';
 import logo from './logo.svg'; 
 import React from 'react';
+import CoinList from './Components/CoinList/CoinList';
 
 
 class App extends React.Component {
@@ -76,25 +76,8 @@ class App extends React.Component {
           <h1 className='App-title'>Coin Exchange </h1>
         </header>
         <AccountBalance amount={this.state.balance} />
-        <table className='coin-table'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Ticker</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
+        <CoinList coinData={this.state.coinData} />
 
-            {this.state.coinData.map((coin) => (
-              <Coin key={coin.ticker} {...coin} />
-            ))}
-
-            {/* <Coin name="Bitcoin" ticker="BTC" price={900} />
-            <Coin name="Ethereum" ticker="ETH" price={299.99} />
-            <Coin name="Tether" ticker="USDT" price={1} /> */}
-          </tbody>
-        </table>
       </div>
     );
   }
