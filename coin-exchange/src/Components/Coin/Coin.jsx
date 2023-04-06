@@ -9,7 +9,7 @@ const Tr = styled.tr`
   border: 1px solid #ccc;
   background-color: #f7f7f7;
   color: #333;
-  font-size: 14px;
+  font-size: 14px;f
   font-weight: 500;
   text-align: center;
   transition: all 0.3s ease-in-out;
@@ -59,7 +59,7 @@ export default class Coin extends Component {
   constructor(props){
     super(props);
     this.state = {
-      price: this.props.price
+      price: this.props.price.toFixed(2)
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -72,7 +72,7 @@ export default class Coin extends Component {
 
     this.setState( (oldState)=>{
       return{
-        price: oldState.price* randomPercentage
+        price: (oldState.price* randomPercentage).toFixed(2)
       };
     });
 
