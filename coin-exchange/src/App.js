@@ -1,8 +1,12 @@
-import './App.css';
 import AccountBalance from './Components/AccountBalance/AccountBalance';
 import React from 'react';
 import AppHeader from './Components/AppHeader/AppHeader';
 import CoinList from './Components/CoinList/CoinList';
+import styled from 'styled-components';
+
+const AppStyle = styled.app`
+text-align: center;
+`;
 
 
 class App extends React.Component {
@@ -70,16 +74,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} alt="React logo" className='App-logo' />
-          <h1 className='App-title'>Coin Exchange </h1>
-        </header> */}
+      <AppStyle>
         <AppHeader />
         <AccountBalance amount={this.state.balance} />
         <CoinList coinData={this.state.coinData} />
 
-      </div>
+      </AppStyle>
     );
   }
 

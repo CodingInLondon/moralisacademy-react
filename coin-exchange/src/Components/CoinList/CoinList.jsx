@@ -1,6 +1,14 @@
 
 import React from 'react';
 import Coin from '../Coin/Coin';
+import styled from 'styled-components';
+
+
+
+const CoinTable = styled.table`
+margin: 50px auto 50px auto;
+text-align: left;
+`;
 
 
 export default class CoinList extends React.Component{
@@ -8,7 +16,7 @@ export default class CoinList extends React.Component{
 
     render() {
         return(
-        <table className='coin-table'>
+        <CoinTable>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -23,7 +31,7 @@ export default class CoinList extends React.Component{
                 ))}
 
             </tbody>
-        </table>
+        </CoinTable>
         );
     }
 
