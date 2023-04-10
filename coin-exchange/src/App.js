@@ -4,7 +4,7 @@ import AppHeader from './Components/AppHeader/AppHeader';
 import CoinList from './Components/CoinList/CoinList';
 import styled from 'styled-components';
 
-const AppStyle = styled.app`
+const AppStyle = styled.div`
 text-align: center;
 `;
 
