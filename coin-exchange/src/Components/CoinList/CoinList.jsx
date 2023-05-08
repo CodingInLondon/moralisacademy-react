@@ -26,9 +26,20 @@ export default class CoinList extends React.Component{
             </thead>
             <tbody>
 
-                {this.props.coinData.map((coin) => (
+                {/* {this.props.coinData.map((coin) => (
                     <Coin key={coin.ticker} {...coin} />
-                ))}
+                ))} */}
+
+                {
+                    this.props.coinData.map( ({name, ticker, price} ) => 
+                        <Coin key={ticker}
+                        name={name}
+                        price={price}
+                        ticker={ticker}
+                        handleRefresh={this.props.handleRefresh}
+                        />
+                    )
+                }
 
             </tbody>
         </CoinTable>

@@ -58,9 +58,6 @@ export default class Coin extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      price: this.props.price.toFixed(2)
-    };
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -68,13 +65,15 @@ export default class Coin extends Component {
   handleClick(event){
     event.preventDefault();
 
-    const randomPercentage = 0.995 + Math.random() * 0.01;
+    this.props.handleRefresh(this.props.ticker);
 
-    this.setState( (oldState)=>{
-      return{
-        price: (oldState.price* randomPercentage).toFixed(2)
-      };
-    });
+    // const randomPercentage = 0.995 + Math.random() * 0.01;
+
+    // this.setState( (oldState)=>{
+    //   return{
+    //     price: (oldState.price* randomPercentage).toFixed(2)
+    //   };
+    // });
 
   }
 
@@ -83,11 +82,12 @@ export default class Coin extends Component {
       <Tr>
         <td>{this.props.name}</td>
         <td>{this.props.ticker}</td>
-        <td>${this.state.price}</td>
+        <td>${this.props.price.toFixed(2)}</td>
         <td>
           <form action="#" method="POST">
             <button onClick={this.handleClick}>Refresh</button>
-          </form></td>
+          </form>
+        </td>
       </Tr>
     )
   }
