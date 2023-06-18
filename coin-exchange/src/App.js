@@ -14,6 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state={
+      showBalance: true,
       balance: 10000,
       coinData: [
         {
@@ -71,6 +72,8 @@ class App extends React.Component {
     }
 
     this.handleRefresh = this.handleRefresh.bind(this);
+    this.handleHideBalance = this.handleHideBalance.bind(this);
+
 
   }
 
@@ -97,11 +100,21 @@ class App extends React.Component {
     this.setState({ coinData: newCoinData});
   }
 
+
+  handleHideBalance(){
+
+
+    this.showBalance = !this.showBalance;
+
+
+    this.setState({showBalance: this.showBalance});
+  }
+
   render() {
     return (
       <AppStyle>
         <AppHeader />
-        <AccountBalance amount={this.state.balance} />
+        <AccountBalance amount={this.state.balance} showBalance={this.showBalance} handleHideBalance={this.handleHideBalance}/>
         <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
       </AppStyle>
     );

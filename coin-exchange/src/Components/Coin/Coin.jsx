@@ -67,14 +67,6 @@ export default class Coin extends Component {
 
     this.props.handleRefresh(this.props.ticker);
 
-    // const randomPercentage = 0.995 + Math.random() * 0.01;
-
-    // this.setState( (oldState)=>{
-    //   return{
-    //     price: (oldState.price* randomPercentage).toFixed(2)
-    //   };
-    // });
-
   }
 
   render() {
