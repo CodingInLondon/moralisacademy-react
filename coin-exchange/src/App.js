@@ -20,55 +20,64 @@ class App extends React.Component {
         {
           name: 'Bitcoin',
           ticker: 'BTC',
-          price: 9999.98
+          price: 9999.98,
+          balance: 0.5, // Example balance value
         },
         {
           name: 'Ethereum',
           ticker: 'ETH',
-          price: 299.99
+          price: 299.99,
+          balance: 2.25, // Example balance value
         },
         {
           name: 'Tether',
           ticker: 'USDT',
-          price: 1
+          price: 1,
+          balance: 100, // Example balance value
         },
         {
           name: 'Binance Coin',
           ticker: 'BNB',
-          price: 450.50
+          price: 450.5,
+          balance: 10, // Example balance value
         },
         {
           name: 'Cardano',
           ticker: 'ADA',
-          price: 2.05
+          price: 2.05,
+          balance: 50, // Example balance value
         },
         {
           name: 'Solana',
           ticker: 'SOL',
-          price: 180.75
+          price: 180.75,
+          balance: 1.75, // Example balance value
         },
         {
           name: 'XRP',
           ticker: 'XRP',
-          price: 0.85
+          price: 0.85,
+          balance: 500, // Example balance value
         },
         {
           name: 'Polkadot',
           ticker: 'DOT',
-          price: 28.50
+          price: 28.5,
+          balance: 8, // Example balance value
         },
         {
           name: 'Dogecoin',
           ticker: 'DOGE',
-          price: 0.22
+          price: 0.22,
+          balance: 1000, // Example balance value
         },
         {
           name: 'Avalanche',
           ticker: 'AVAX',
-          price: 110.00
-        }
-
-      ]
+          price: 110.0,
+          balance: 0.1, // Example balance value
+        },
+      ],
     }
 
     this.handleRefresh = this.handleRefresh.bind(this);
@@ -78,10 +87,8 @@ class App extends React.Component {
   }
 
   handleRefresh(valueChangedTicker){
-    // const coin = this.state.coinData.find(({ticker}) => ticker === valueChangedTicker);
-    // console.log(coin);
 
-    const newCoinData = this.state.coinData.map( ({ticker, name, price})=> {
+    const newCoinData = this.state.coinData.map( ({ticker, name, price, balance})=> {
       let newPrice = price;
 
       if(valueChangedTicker === ticker){
@@ -93,7 +100,8 @@ class App extends React.Component {
       return{
         ticker,
         name,
-        price: newPrice
+        price: newPrice,
+        balance
       }
     })
 
@@ -114,8 +122,8 @@ class App extends React.Component {
     return (
       <AppStyle>
         <AppHeader />
-        <AccountBalance amount={this.state.balance} showBalance={this.showBalance} handleHideBalance={this.handleHideBalance}/>
-        <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
+        <AccountBalance showBalance={this.showBalance} amount={this.state.balance}  handleHideBalance={this.handleHideBalance}/>
+        <CoinList showBalance={this.showBalance} coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
       </AppStyle>
     );
   }

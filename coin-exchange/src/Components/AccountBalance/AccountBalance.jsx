@@ -35,7 +35,6 @@ export default class AccountBalance extends Component{
     render(){
         const buttonText = this.props.showBalance ? 'Hide Balance': 'Show Balance';
 
-
         return (
             <Section>
               <form action="#" method="POST">
@@ -47,27 +46,7 @@ export default class AccountBalance extends Component{
             </Section>
           );
           
-          
-
-        // if (this.props.showBalance){
-        //     return(
-        //         <Section>
-        //             Balance: ${this.props.amount}
-        //             <form action="#" method="POST">
-        //                 <button onClick={this.handleClick}>{buttonText}</button>
-        //             </form>
-        //         </Section>
-        //     );
-        // }
-        // else{
-        //     return(
-        //         <Section>
-        //             <form action="#" method="POST">
-        //                 <button onClick={this.handleClick}>{buttonText}</button>
-        //             </form>
-        //         </Section>
-        //     );
-        // };
+        
     }
 
 }

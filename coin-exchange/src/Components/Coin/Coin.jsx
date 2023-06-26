@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FiEyeOff } from 'react-icons/fi';
 
 
 
@@ -30,6 +31,7 @@ const Tr = styled.tr`
 
   td:nth-child(3) {
     text-align: right;
+    
   }
 
   td:last-child {
@@ -53,6 +55,13 @@ const Tr = styled.tr`
   }
 `;
 
+const CenteredIcon = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
 
 export default class Coin extends Component {
 
@@ -74,7 +83,11 @@ export default class Coin extends Component {
       <Tr>
         <td>{this.props.name}</td>
         <td>{this.props.ticker}</td>
-        <td>${this.props.price.toFixed(2)}</td>
+        <td>{this.props.showBalance ? `$${this.props.price.toFixed(2)}` :             
+          <CenteredIcon>
+            <FiEyeOff />
+          </CenteredIcon>}</td>        
+        <td>{this.props.balance}</td>
         <td>
           <form action="#" method="POST">
             <button onClick={this.handleClick}>Refresh</button>
