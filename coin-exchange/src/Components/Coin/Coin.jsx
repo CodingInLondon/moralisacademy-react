@@ -83,11 +83,11 @@ export default class Coin extends Component {
       <Tr>
         <td>{this.props.name}</td>
         <td>{this.props.ticker}</td>
-        <td>{this.props.showBalance ? `$${this.props.price.toFixed(2)}` :             
+        <td>{this.props.price.toFixed(2)}</td>
+        <td>{this.props.showBalance ? `$${this.props.balance}` :             
           <CenteredIcon>
             <FiEyeOff />
           </CenteredIcon>}</td>        
-        <td>{this.props.balance}</td>
         <td>
           <form action="#" method="POST">
             <button onClick={this.handleClick}>Refresh</button>
