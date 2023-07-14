@@ -11,105 +11,95 @@ text-align: center;
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state={
-      showBalance: true,
-      balance: 10000,
-      coinData: [
-        {
-          name: 'Bitcoin',
-          ticker: 'BTC',
-          price: 9999.98,
-          balance: 0.5, // Example balance value
-        },
-        {
-          name: 'Ethereum',
-          ticker: 'ETH',
-          price: 299.99,
-          balance: 2.25, // Example balance value
-        },
-        {
-          name: 'Tether',
-          ticker: 'USDT',
-          price: 1,
-          balance: 100, // Example balance value
-        },
-        {
-          name: 'Binance Coin',
-          ticker: 'BNB',
-          price: 450.5,
-          balance: 10, // Example balance value
-        },
-        {
-          name: 'Cardano',
-          ticker: 'ADA',
-          price: 2.05,
-          balance: 50, // Example balance value
-        },
-        {
-          name: 'Solana',
-          ticker: 'SOL',
-          price: 180.75,
-          balance: 1.75, // Example balance value
-        },
-        {
-          name: 'XRP',
-          ticker: 'XRP',
-          price: 0.85,
-          balance: 500, // Example balance value
-        },
-        {
-          name: 'Polkadot',
-          ticker: 'DOT',
-          price: 28.5,
-          balance: 8, // Example balance value
-        },
-        {
-          name: 'Dogecoin',
-          ticker: 'DOGE',
-          price: 0.22,
-          balance: 1000, // Example balance value
-        },
-        {
-          name: 'Avalanche',
-          ticker: 'AVAX',
-          price: 110.0,
-          balance: 0.1, // Example balance value
-        },
-      ],
-    }
-
-    this.handleRefresh = this.handleRefresh.bind(this);
-    this.handleHideBalance = this.handleHideBalance.bind(this);
-
-
+  state={
+    showBalance: true,
+    balance: 10000,
+    coinData: [
+      {
+        name: 'Bitcoin',
+        ticker: 'BTC',
+        price: 9999.98,
+        balance: 0.5, // Example balance value
+      },
+      {
+        name: 'Ethereum',
+        ticker: 'ETH',
+        price: 299.99,
+        balance: 2.25, // Example balance value
+      },
+      {
+        name: 'Tether',
+        ticker: 'USDT',
+        price: 1,
+        balance: 100, // Example balance value
+      },
+      {
+        name: 'Binance Coin',
+        ticker: 'BNB',
+        price: 450.5,
+        balance: 10, // Example balance value
+      },
+      {
+        name: 'Cardano',
+        ticker: 'ADA',
+        price: 2.05,
+        balance: 50, // Example balance value
+      },
+      {
+        name: 'Solana',
+        ticker: 'SOL',
+        price: 180.75,
+        balance: 1.75, // Example balance value
+      },
+      {
+        name: 'XRP',
+        ticker: 'XRP',
+        price: 0.85,
+        balance: 500, // Example balance value
+      },
+      {
+        name: 'Polkadot',
+        ticker: 'DOT',
+        price: 28.5,
+        balance: 8, // Example balance value
+      },
+      {
+        name: 'Dogecoin',
+        ticker: 'DOGE',
+        price: 0.22,
+        balance: 1000, // Example balance value
+      },
+      {
+        name: 'Avalanche',
+        ticker: 'AVAX',
+        price: 110.0,
+        balance: 0.1, // Example balance value
+      },
+    ],
   }
 
-  handleRefresh(valueChangedTicker){
 
-    const newCoinData = this.state.coinData.map( ({ticker, name, price, balance})=> {
-      let newPrice = price;
+  handleRefresh = (valueChangedTicker)=> {
 
-      if(valueChangedTicker === ticker){
+    const newCoinData = this.state.coinData.map( (values)=> { 
+
+      const newValues = { ...values};
+
+      if(valueChangedTicker === values.ticker){
         const randomPercentage = 0.995 + Math.random() * 0.01;
 
-        newPrice = (price * randomPercentage);
+        newValues.price *= randomPercentage;
 
       }
-      return{
-        ticker,
-        name,
-        price: newPrice,
-        balance
-      }
+      return newValues;
+      
     })
 
     this.setState({ coinData: newCoinData});
   }
 
 
-  handleHideBalance(){
+  handleHideBalance = ()=>{
 
 
     this.showBalance = !this.showBalance;
