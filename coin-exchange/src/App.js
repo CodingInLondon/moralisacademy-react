@@ -4,6 +4,9 @@ import AppHeader from './Components/AppHeader/AppHeader';
 import CoinList from './Components/CoinList/CoinList';
 import styled from 'styled-components';
 
+import LiveTickers from './Components/LiveTickers/livetickers';
+
+
 const AppStyle = styled.div`
 text-align: center;
 `;
@@ -79,6 +82,7 @@ class App extends React.Component {
   }
 
 
+
   handleRefresh = (valueChangedTicker)=> {
 
     const newCoinData = this.state.coinData.map( (values)=> { 
@@ -101,9 +105,7 @@ class App extends React.Component {
 
   handleHideBalance = ()=>{
 
-
     this.showBalance = !this.showBalance;
-
 
     this.setState({showBalance: this.showBalance});
   }
@@ -112,6 +114,9 @@ class App extends React.Component {
     return (
       <AppStyle>
         <AppHeader />
+        <h2>Today's Cryptocurrency Prices by Market Cap</h2>
+        <LiveTickers />
+        <h2>My Portfolio</h2>
         <AccountBalance showBalance={this.showBalance} amount={this.state.balance}  handleHideBalance={this.handleHideBalance}/>
         <CoinList showBalance={this.showBalance} coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
       </AppStyle>

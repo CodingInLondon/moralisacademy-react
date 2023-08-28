@@ -9,9 +9,6 @@ const Section = styled.section`
     font-weight: bold;
     color: #333; 
     text-align: left;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex; /* Add this line */
     align-items: center; /* Add this line */    
 `;
