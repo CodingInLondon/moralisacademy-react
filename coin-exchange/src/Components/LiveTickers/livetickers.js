@@ -37,17 +37,17 @@ const Tr = styled.tr`
 
   td:nth-child(2) {
     text-align: left;
-    
-  } 
+
+  }
 
   td:nth-child(3) {
     text-align: centre;
-    
+
   }
 
   td:nth-child(4) {
     text-align: right;
-    
+
   }
 
 `;
@@ -61,16 +61,34 @@ function LiveTickers() {
 
     useEffect(() => {
 
-        axios.get('https://api.coinpaprika.com/v1/tickers')
-            .then(response => {
-                const top10Coins = response.data.slice(0, 20); // Get the top 20 coins
-                setCoins(top10Coins);
-                setLoading(false);
-            })
-            .catch(error => {
-                setError(error);
-                setLoading(false);
-            });
+      async function getCoins(){ 
+
+        try{
+    
+          const responses = await Promise.all([
+              axios.get('https://api.coinpaprika.com/v1/tickers/btc-bitcoin'),
+              axios.get('https://api.coinpaprika.com/v1/tickers/eth-ethereum'),
+              axios.get('https://api.coinpaprika.com/v1/tickers/usdt-tether'),
+              axios.get('https://api.coinpaprika.com/v1/tickers/bnb-binance-coin'),
+              axios.get('https://api.coinpaprika.com/v1/tickers/xrp-xrp')]
+          )
+
+          const coins = responses.map( response => response.data);
+
+          setCoins(coins);
+          setLoading(false);
+
+        }
+        catch(error){
+          
+          setError(error);
+          setLoading(false);        
+        }
+      }
+
+      getCoins();
+
+
     }, []);
 
 
