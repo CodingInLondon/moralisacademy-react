@@ -53,7 +53,6 @@ const Tr = styled.tr`
 `;
 
 
-
 function LiveTickers() {
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -61,17 +60,16 @@ function LiveTickers() {
 
     useEffect(() => {
 
-      async function getCoins(){ 
+      async function getCoins(){
 
         try{
-    
-          const responses = await Promise.all([
-              axios.get('https://api.coinpaprika.com/v1/tickers/btc-bitcoin'),
-              axios.get('https://api.coinpaprika.com/v1/tickers/eth-ethereum'),
-              axios.get('https://api.coinpaprika.com/v1/tickers/usdt-tether'),
-              axios.get('https://api.coinpaprika.com/v1/tickers/bnb-binance-coin'),
-              axios.get('https://api.coinpaprika.com/v1/tickers/xrp-xrp')]
-          )
+
+          const response = await axios.get('https://api.coinpaprika.com/v1/tickers');
+          const top10Coins = response.data.slice(0, 10).map( coin => coin.id); // Get the top 10 coins
+          const tickerurl = "https://api.coinpaprika.com/v1/tickers/";
+
+          const promises = top10Coins.map( async (coin) => { return axios.get(tickerurl + coin); });
+          const responses = await Promise.all(promises);
 
           const coins = responses.map( response => response.data);
 
@@ -80,9 +78,9 @@ function LiveTickers() {
 
         }
         catch(error){
-          
+
           setError(error);
-          setLoading(false);        
+          setLoading(false);
         }
       }
 
