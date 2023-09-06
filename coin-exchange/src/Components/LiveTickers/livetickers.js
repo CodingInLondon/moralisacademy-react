@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 
+
 const CoinTable = styled.table`
 margin: 50px auto 50px auto;
 text-align: left;
@@ -53,6 +54,8 @@ const Tr = styled.tr`
 `;
 
 
+const COINT_COUNT = 5;
+
 function LiveTickers() {
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -65,10 +68,10 @@ function LiveTickers() {
         try{
 
           const response = await axios.get('https://api.coinpaprika.com/v1/tickers');
-          const top10Coins = response.data.slice(0, 10).map( coin => coin.id); // Get the top 10 coins
+          const topCoins = response.data.slice(0, COINT_COUNT).map( coin => coin.id); // Get the top 5 coins
           const tickerurl = "https://api.coinpaprika.com/v1/tickers/";
 
-          const promises = top10Coins.map( async (coin) => { return axios.get(tickerurl + coin); });
+          const promises = topCoins.map( async (coin) => { return axios.get(tickerurl + coin); });
           const responses = await Promise.all(promises);
 
           const coins = responses.map( response => response.data);
