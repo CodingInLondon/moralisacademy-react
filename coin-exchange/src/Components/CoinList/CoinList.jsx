@@ -16,6 +16,7 @@ text-align: left;
 export default class CoinList extends React.Component{
 
     render() {
+
         return(
         <CoinTable>
             <thead>
@@ -30,8 +31,12 @@ export default class CoinList extends React.Component{
             <tbody>
 
                 {
-                    this.props.coinData.map( ({name, ticker, price, balance} ) => 
-                        <Coin key={ticker}
+                    // console.log(this.props.coinData);
+
+                    this.props.coinData.map( ({id, name, ticker, price, balance} ) => 
+                        <Coin 
+                        key={id}
+                        id={id}
                         name={name}
                         price={price}
                         ticker={ticker}

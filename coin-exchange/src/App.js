@@ -3,13 +3,15 @@ import React from 'react';
 import AppHeader from './Components/AppHeader/AppHeader';
 import CoinList from './Components/CoinList/CoinList';
 import styled from 'styled-components';
-
-import LiveTickers from './Components/LiveTickers/livetickers';
+import axios from 'axios';
 
 
 const AppStyle = styled.div`
 text-align: center;
 `;
+
+
+const COINT_COUNT = 15;
 
 
 class App extends React.Component {
@@ -18,86 +20,80 @@ class App extends React.Component {
     showBalance: true,
     balance: 10000,
     coinData: [
-      {
-        name: 'Bitcoin',
-        ticker: 'BTC',
-        price: 9999.98,
-        balance: 0.5, // Example balance value
-      },
-      {
-        name: 'Ethereum',
-        ticker: 'ETH',
-        price: 299.99,
-        balance: 2.25, // Example balance value
-      },
-      {
-        name: 'Tether',
-        ticker: 'USDT',
-        price: 1,
-        balance: 100, // Example balance value
-      },
-      {
-        name: 'Binance Coin',
-        ticker: 'BNB',
-        price: 450.5,
-        balance: 10, // Example balance value
-      },
-      {
-        name: 'Cardano',
-        ticker: 'ADA',
-        price: 2.05,
-        balance: 50, // Example balance value
-      },
-      {
-        name: 'Solana',
-        ticker: 'SOL',
-        price: 180.75,
-        balance: 1.75, // Example balance value
-      },
-      {
-        name: 'XRP',
-        ticker: 'XRP',
-        price: 0.85,
-        balance: 500, // Example balance value
-      },
-      {
-        name: 'Polkadot',
-        ticker: 'DOT',
-        price: 28.5,
-        balance: 8, // Example balance value
-      },
-      {
-        name: 'Dogecoin',
-        ticker: 'DOGE',
-        price: 0.22,
-        balance: 1000, // Example balance value
-      },
-      {
-        name: 'Avalanche',
-        ticker: 'AVAX',
-        price: 110.0,
-        balance: 0.1, // Example balance value
-      },
-    ],
+    ]
   }
 
 
+  componentDidMount = async ()=>{ 
 
-  handleRefresh = (valueChangedTicker)=> {
+    try{
 
-    const newCoinData = this.state.coinData.map( (values)=> { 
+      const response = await axios.get('https://api.coinpaprika.com/v1/tickers');
+      const topCoins = response.data.slice(0, COINT_COUNT).map( coin => coin.id); // Get the top 5 coins
+      const tickerurl = "https://api.coinpaprika.com/v1/tickers/";
+
+      const promises = topCoins.map( async (coin) => { return axios.get(tickerurl + coin); });
+      const responses = await Promise.all(promises);
+
+      const newCoinData = responses.map( response =>
+        {
+          const coin = response.data;
+          return{
+            id: coin.id,
+            name: coin.name,
+            ticker: coin.symbol,
+            price: coin.quotes.USD.price,
+            balance: 0
+          };
+        }
+      );
+
+
+      this.setState({ coinData: newCoinData});
+
+    }
+    catch(error){
+      console.log(error);
+    }
+
+  }
+
+
+  handleRefresh = async(id)=> {
+
+    console.log('handleRefresh', id);
+
+    async function getNewPrice(id){
+      const tickerurl = `https://api.coinpaprika.com/v1/tickers/${id}`;
+
+      try{
+        const response = await axios.get(tickerurl);
+        const coin = response.data;
+        return coin.quotes.USD.price;
+      }
+      catch(error){
+        console.log(error);
+      }
+
+    }
+
+    const newCoinDataPromises = this.state.coinData.map( async (values)=> { 
 
       const newValues = { ...values};
 
-      if(valueChangedTicker === values.ticker){
-        const randomPercentage = 0.995 + Math.random() * 0.01;
+      if(id === values.id){
 
-        newValues.price *= randomPercentage;
+        const newPrice = await getNewPrice(id);
+        console.log("newPrice", newPrice);
+
+        newValues.price = newPrice;
 
       }
       return newValues;
       
     })
+
+    const newCoinData = await Promise.all(newCoinDataPromises);
 
     this.setState({ coinData: newCoinData});
   }
@@ -115,8 +111,6 @@ class App extends React.Component {
       <AppStyle>
         <AppHeader />
         <h2>Today's Cryptocurrency Prices by Market Cap</h2>
-        <LiveTickers />
-        <h2>My Portfolio</h2>
         <AccountBalance showBalance={this.showBalance} amount={this.state.balance}  handleHideBalance={this.handleHideBalance}/>
         <CoinList showBalance={this.showBalance} coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
       </AppStyle>

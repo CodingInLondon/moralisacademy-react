@@ -69,7 +69,7 @@ export default class Coin extends Component {
   handleClick = (event) => {
     event.preventDefault();
 
-    this.props.handleRefresh(this.props.ticker);
+    this.props.handleRefresh(this.props.id);
 
   }
 
@@ -95,8 +95,7 @@ export default class Coin extends Component {
 
 Coin.propTypes = {
   name: PropTypes.string.isRequired,
-  ticker: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired
+  ticker: PropTypes.string.isRequired
 }
 
 
