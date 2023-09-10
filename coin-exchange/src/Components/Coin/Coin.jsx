@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FiEyeOff } from 'react-icons/fi';
@@ -63,34 +63,32 @@ const CenteredIcon = styled.span`
 `;
 
 
-export default class Coin extends Component {
+export default function Coin(props)  {
 
 
-  handleClick = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
 
-    this.props.handleRefresh(this.props.id);
+    props.handleRefresh(props.id);
 
   }
 
-  render() {
-    return (
-      <Tr>
-        <td>{this.props.name}</td>
-        <td>{this.props.ticker}</td>
-        <td>{this.props.price.toFixed(2)}</td>
-        <td>{this.props.showBalance ? `$${this.props.balance}` :             
-          <CenteredIcon>
-            <FiEyeOff />
-          </CenteredIcon>}</td>        
-        <td>
-          <form action="#" method="POST">
-            <button onClick={this.handleClick}>Refresh</button>
-          </form>
-        </td>
-      </Tr>
-    )
-  }
+  return (
+    <Tr>
+      <td>{props.name}</td>
+      <td>{props.ticker}</td>
+      <td>{props.price.toFixed(2)}</td>
+      <td>{props.showBalance ? `$${props.balance}` :             
+        <CenteredIcon>
+          <FiEyeOff />
+        </CenteredIcon>}</td>        
+      <td>
+        <form action="#" method="POST">
+          <button onClick={handleClick}>Refresh</button>
+        </form>
+      </td>
+    </Tr>
+  )
 }
 
 Coin.propTypes = {
