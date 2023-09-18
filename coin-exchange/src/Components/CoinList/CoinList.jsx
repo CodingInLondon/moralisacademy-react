@@ -4,7 +4,7 @@ import Coin from '../Coin/Coin';
 import styled from 'styled-components';
 
 const CoinTable = styled.table`
-margin: 50px auto 50px auto
+margin: 50px auto 50px auto;
 text-align: left;
 `;
 
