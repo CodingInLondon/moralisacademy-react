@@ -1,30 +1,34 @@
 import AccountBalance from './Components/AccountBalance/AccountBalance';
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppHeader from './Components/AppHeader/AppHeader';
 import CoinList from './Components/CoinList/CoinList';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useState } from 'react';
 
 
 const AppStyle = styled.div`
 text-align: center;
 `;
 
-
 const COINT_COUNT = 15;
 
 
-class App extends React.Component {
+function App(props)  {
 
-  state={
-    showBalance: true,
-    balance: 10000,
-    coinData: [
-    ]
-  }
+  // state={
+  //   showBalance: true,
+  //   balance: 10000,
+  //   coinData: [
+  //   ]
+  // }
+
+  const [balance, setBalance] = useState(10000);
+  const [showBalance, setShowBalance] = useState(true);
+  const [coinData, setCoinData] = useState([]);
 
 
-  componentDidMount = async ()=>{ 
+  const componentDidMount = async ()=>{ 
 
     try{
 
@@ -48,8 +52,7 @@ class App extends React.Component {
         }
       );
 
-
-      this.setState({ coinData: newCoinData});
+      setCoinData(newCoinData);
 
     }
     catch(error){
@@ -59,7 +62,16 @@ class App extends React.Component {
   }
 
 
-  handleRefresh = async(id)=> {
+  useEffect( ()=>{  // componentDidMount  
+
+    if(coinData.length === 0){
+      componentDidMount();
+    }
+  }
+  );
+
+
+  const handleRefresh = async(id)=> {
 
     console.log('handleRefresh', id);
 
@@ -77,7 +89,7 @@ class App extends React.Component {
 
     }
 
-    const newCoinDataPromises = this.state.coinData.map( async (values)=> { 
+    const newCoinDataPromises = coinData.map( async (values)=> { 
 
       const newValues = { ...values};
 
@@ -95,27 +107,23 @@ class App extends React.Component {
 
     const newCoinData = await Promise.all(newCoinDataPromises);
 
-    this.setState({ coinData: newCoinData});
+    setCoinData(newCoinData);
   }
 
 
-  handleHideBalance = ()=>{
+  const handleHideBalance = ()=>{
 
-    this.showBalance = !this.showBalance;
-
-    this.setState({showBalance: this.showBalance});
+    setShowBalance(!showBalance);
   }
 
-  render() {
-    return (
-      <AppStyle>
-        <AppHeader />
-        <h2>Today's Cryptocurrency Prices by Market Cap</h2>
-        <AccountBalance showBalance={this.showBalance} amount={this.state.balance}  handleHideBalance={this.handleHideBalance}/>
-        <CoinList showBalance={this.showBalance} coinData={this.state.coinData} handleRefresh={this.handleRefresh}/>
-      </AppStyle>
-    );
-  }
+  return (
+    <AppStyle>
+      <AppHeader />
+      <h2>Today's Cryptocurrency Prices by Market Cap</h2>
+      <AccountBalance showBalance={showBalance} amount={balance}  handleHideBalance={handleHideBalance}/>
+      <CoinList showBalance={showBalance} coinData={coinData} handleRefresh={handleRefresh}/>
+    </AppStyle>
+  );
 
 }
 
