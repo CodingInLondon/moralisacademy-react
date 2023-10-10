@@ -16,12 +16,6 @@ const COINT_COUNT = 15;
 
 function App(props)  {
 
-  // state={
-  //   showBalance: true,
-  //   balance: 10000,
-  //   coinData: [
-  //   ]
-  // }
 
   const [balance, setBalance] = useState(10000);
   const [showBalance, setShowBalance] = useState(true);
