@@ -14,7 +14,7 @@
     "styled-components": "^5.3.9",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "http://codinginlondon.github.io/coin-exchange",
+  "homepage": "http://codinginlondon.github.io/moralisacademy-react",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
