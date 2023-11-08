@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/moralisacademy-react/static/css/main.94537e7e.css",
+    "main.js": "/moralisacademy-react/static/js/main.65120c1c.js",
+    "static/js/787.96192ab1.chunk.js": "/moralisacademy-react/static/js/787.96192ab1.chunk.js",
+    "static/media/logo.svg": "/moralisacademy-react/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/moralisacademy-react/index.html",
+    "main.94537e7e.css.map": "/moralisacademy-react/static/css/main.94537e7e.css.map",
+    "main.65120c1c.js.map": "/moralisacademy-react/static/js/main.65120c1c.js.map",
+    "787.96192ab1.chunk.js.map": "/moralisacademy-react/static/js/787.96192ab1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94537e7e.css",
+    "static/js/main.65120c1c.js"
+  ]
+}
